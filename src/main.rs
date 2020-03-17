@@ -18,7 +18,7 @@ fn main() {
     let now = time::Instant::now();
 
     // TODO: configure this from the command line
-    // 10 minutes as of now
+    // 10 minutes as of now - default
 
     // TODO: if "-" read from stdin
     
@@ -27,10 +27,16 @@ fn main() {
     let countdown_seconds = 600;
 
     let countdown_duration = time::Duration::from_secs(countdown_seconds);
-    thread::sleep(countdown_duration);
+    //thread::sleep(countdown_duration);
 
-    // TODO: prompt every second with the remaining time
+    // TODO: add fancier display - use strftime
     // TODO: make this an option
+    // TODO: allow custom precision
+    // TODO: make sure as little time is lost as possible
+    for i in 0..countdown_seconds {
+        thread::sleep(time::Duration::from_secs(1));
+        println!("{:?}", time::Duration::from_secs(countdown_seconds - i));
+    }
 
     // TODO: make this an option
     let then = time::Instant::now();
@@ -49,4 +55,5 @@ fn main() {
     });
 
     // TODO: allow arbitrary command execution - as an option
+    // TODO: test with dunst integration
 }
