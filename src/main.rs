@@ -19,23 +19,31 @@ fn main() {
 
     // TODO: configure this from the command line
     // 10 minutes as of now - default
+    // add a s,m,h,d,w,y parser - default to s if cannot recognize
 
     // TODO: if "-" read from stdin
     
-    // TODO: allow for an absolute date as well as a timestamp 
-    // TODO: (if in the past err)
     let countdown_seconds = 600;
 
     let countdown_duration = time::Duration::from_secs(countdown_seconds);
     //thread::sleep(countdown_duration);
 
-    // TODO: add fancier display - use strftime
     // TODO: make this an option
-    // TODO: allow custom precision
     // TODO: make sure as little time is lost as possible
-    for i in 0..countdown_seconds {
+    // TODO: allow for overwriting the output (option)
+    // TODO: allow custom command here
+    for i in (0..countdown_seconds).rev() {
         thread::sleep(time::Duration::from_secs(1));
-        println!("{:?}", time::Duration::from_secs(countdown_seconds - i));
+
+        // TODO: extract const
+        // TODO: can this be made generic? / do it up to years
+        let minutes_remaining = i / 60;
+        let seconds_remaining = i % 60;
+
+        let formatted_minutes = if minutes_remaining > 0 { format!("{}m ", minutes_remaining) } else { "".to_string() };
+        let formatted_seconds = format!("{}s", seconds_remaining);
+
+        println!("{}{}", formatted_minutes, formatted_seconds);
     }
 
     // TODO: make this an option

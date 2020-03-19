@@ -15,7 +15,6 @@ todo: ## list all TODOs in the project
 
 build: setup target/release ## create artifact
 	
-
 lint: setup ## run static analysis
 	@echo "Not implemented"; false
 
